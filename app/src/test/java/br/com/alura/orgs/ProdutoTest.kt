@@ -5,10 +5,10 @@ import org.junit.Assert
 import org.junit.Test
 import java.math.BigDecimal
 
-class TestaProduto {
+class ProdutoTest {
 
     @Test
-    fun aoCriarUmProdutoComOValorCertoOValorDeveriaSerValido() {
+    fun `deve retornar verdadeiro quando o valor for valido`() {
         val produtoValido = Produto(
             nome = "Banana",
             descricao = "Banana prata",
@@ -21,7 +21,7 @@ class TestaProduto {
     }
 
     @Test
-    fun seOValorForMaiorQueCemReaisDeveDarErro() {
+    fun `deve retornar falso quando o valor for maior que cem`() {
         //Arrange - Arrumar
         val produtoInvalido = Produto(
             nome = "Carambola",
@@ -37,7 +37,7 @@ class TestaProduto {
     }
 
     @Test
-    fun quandoOValorForMenorOuIgualAZeroValorEhValidoDeveSerFalso() {
+    fun `deve retornar falso quando o valor for menor ou igual a zero`() {
         val produtoComValorIgualAZero = Produto(
             nome = "Lichia",
             descricao = "Doce",

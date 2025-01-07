@@ -4,10 +4,10 @@ import br.com.alura.orgs.model.Usuario
 import org.junit.Assert
 import org.junit.Test
 
-class TestaUsuario {
+class UsuarioTest {
 
     @Test
-    fun retornaVerdadeiroSeOsDadosDoUsuarioEstaoCorretos() {
+    fun `deve retornar verdadeiro quando os dados do usuario forem validos`() {
         val usuarioValido = Usuario(
             id = "usuario",
             email = "usuario@valido.com",
@@ -19,7 +19,7 @@ class TestaUsuario {
     }
 
     @Test
-    fun retornaFalsoSeOEmailDoUsuarioEhInvalido() {
+    fun `deve retornar falso quando o email do usuario for invalido`() {
         // Arrange - Organizar
         val usuarioInvalido = Usuario(
             id = "usuario",
@@ -35,7 +35,7 @@ class TestaUsuario {
     }
 
     @Test
-    fun retornaFalsoSeASenhaDoUsuarioEhFraca() {
+    fun `deve retornar falso quando a senha do usuario for fraca`() {
         // Arrange - Organizar
         val usuarioInvalido = Usuario(
             id = "usuario",
