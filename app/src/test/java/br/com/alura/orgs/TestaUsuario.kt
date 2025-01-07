@@ -31,7 +31,7 @@ class TestaUsuario {
         val resultado = usuarioInvalido.ehValido()
 
         // Assert - Afirmar
-        Assert.assertEquals(false, resultado)
+        Assert.assertFalse(resultado)
     }
 
     @Test
@@ -47,7 +47,7 @@ class TestaUsuario {
         val resultado = usuarioInvalido.ehValido()
 
         // Assert - Afirmar
-        Assert.assertEquals(false, resultado)
+        Assert.assertFalse(resultado)
     }
 
 }
