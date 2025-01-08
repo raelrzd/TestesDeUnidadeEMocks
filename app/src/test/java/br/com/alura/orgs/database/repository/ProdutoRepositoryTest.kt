@@ -2,16 +2,17 @@ package br.com.alura.orgs.database.repository
 
 import br.com.alura.orgs.database.dao.ProdutoDao
 import br.com.alura.orgs.model.Produto
-import io.mockk.every
+import io.mockk.coEvery
+import io.mockk.coVerify
 import io.mockk.mockk
-import io.mockk.verify
+import kotlinx.coroutines.test.runTest
 import org.junit.Test
 import java.math.BigDecimal
 
 class ProdutoRepositoryTests {
 
     @Test
-    fun `deve chamar o dao quando salva um produto`() {
+    fun `deve chamar o dao quando salva um produto`() = runTest {
         //Arrange - Config
         val dao = mockk<ProdutoDao>()
         val produtoRepository = ProdutoRepository(dao)
@@ -21,14 +22,14 @@ class ProdutoRepositoryTests {
             valor = BigDecimal("6.99")
         )
 
-        every {
+        coEvery {
             dao.salva(produto)
         }.returns(Unit)
 
         //Act
         produtoRepository.salva(produto)
 
-        verify {
+        coVerify {
             dao.salva(produto)
         }
     }

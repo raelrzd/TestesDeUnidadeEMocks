@@ -10,13 +10,15 @@ import kotlinx.coroutines.flow.Flow
 interface UsuarioDao {
 
     @Insert
-    fun salva(usuario: Usuario)
+    suspend fun salva(usuario: Usuario)
 
-    @Query("""
+    @Query(
+        """
         SELECT * FROM Usuario 
         WHERE id = :usuarioId 
-        AND senha = :senha""")
-    fun autentica(
+        AND senha = :senha"""
+    )
+    suspend fun autentica(
         usuarioId: String,
         senha: String
     ): Usuario?

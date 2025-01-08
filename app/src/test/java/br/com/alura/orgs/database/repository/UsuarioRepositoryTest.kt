@@ -2,15 +2,16 @@ package br.com.alura.orgs.database.repository
 
 import br.com.alura.orgs.database.dao.UsuarioDao
 import br.com.alura.orgs.model.Usuario
-import io.mockk.every
+import io.mockk.coEvery
+import io.mockk.coVerify
 import io.mockk.mockk
-import io.mockk.verify
+import kotlinx.coroutines.test.runTest
 import org.junit.Test
 
 class UsuarioRepositoryTest {
 
     @Test
-    fun `deve chamar o dao quando salva um usuario`() {
+    fun `deve chamar o dao quando salva um usuario`() = runTest {
         //Arrange - Config
         val dao = mockk<UsuarioDao>()
         val usuarioRepository = UsuarioRepository(dao)
@@ -20,20 +21,20 @@ class UsuarioRepositoryTest {
             senha = "testesenha"
         )
 
-        every {
+        coEvery {
             dao.salva(usuario)
         }.returns(Unit)
 
         //Act
         usuarioRepository.salva(usuario)
 
-        verify {
+        coVerify {
             dao.salva(usuario)
         }
     }
 
     @Test
-    fun `deve chamar o dao quando autentica um usuario`() {
+    fun `deve chamar o dao quando autentica um usuario`() = runTest {
         //Arrange - Config
         val dao = mockk<UsuarioDao>()
         val usuarioRepository = UsuarioRepository(dao)
@@ -41,7 +42,7 @@ class UsuarioRepositoryTest {
         val usuarioId = "usuario"
         val usuarioSenha = "testesenha"
 
-        every {
+        coEvery {
             dao.autentica(usuarioId, usuarioSenha)
         }.returns(
             Usuario(
@@ -54,7 +55,7 @@ class UsuarioRepositoryTest {
         //Act
         usuarioRepository.autentica(usuarioId, usuarioSenha)
 
-        verify {
+        coVerify {
             dao.autentica(usuarioId, usuarioSenha)
         }
     }

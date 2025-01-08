@@ -1,6 +1,10 @@
 package br.com.alura.orgs.database.dao
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 import br.com.alura.orgs.model.Produto
 import kotlinx.coroutines.flow.Flow
 
@@ -11,10 +15,10 @@ interface ProdutoDao {
     fun buscaTodos(): Flow<List<Produto>>
 
     @Query("SELECT * FROM Produto WHERE usuarioId = :usuarioId")
-    fun buscaTodosDoUsuario(usuarioId: String) : Flow<List<Produto>>
+    fun buscaTodosDoUsuario(usuarioId: String): Flow<List<Produto>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun salva(vararg produto: Produto)
+    suspend fun salva(vararg produto: Produto)
 
     @Delete
     suspend fun remove(produto: Produto)
